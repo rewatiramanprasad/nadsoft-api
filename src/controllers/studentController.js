@@ -26,10 +26,18 @@ const addStudent = async (req, res, next) => {
 
 const fetchStudentsRecord = async (req, res, next) => {
   try {
-    const data = await prisma.student.findMany({})
-
-    const result = await response(data, true, '')
-    console.log(result)
+    const limit = Number(req.query.limit || 10)
+    const page = Number(req.query.page || 1)
+    const skip = (page - 1) * limit
+    const data = await prisma.student.findMany({
+      skip: skip,
+      take: limit,
+      orderBy: { createdAt: 'desc' },
+    })
+    const count = await prisma.student.count({})
+    const totalPages = Math.ceil(count / limit)
+     const mapping=[{ students: data, count: count, page, totalPages: totalPages }]
+    const result = response(mapping, true, `${data.length} rows fetched`)
     res.status(200).send(result).end()
   } catch (error) {
     next(error)

@@ -11,7 +11,6 @@ const {
 
 router.post('/v1/students/addStudent', addStudent)
 router.get('/v1/students/health', checkHealth)
-
 router.get('/v1/students/fetchStudents', fetchStudentsRecord)
 router.get('/v1/students/fetchById/:id', fetchById)
 router.put('/v1/students/updateStudent/:id', updateStudentDetails)
