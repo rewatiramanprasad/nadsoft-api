@@ -9,7 +9,6 @@
     "production": "node index.js",
     "build": "npx prisma generate && npm run start",
     "postinstall": "prisma generate"
-
   },
   "author": "",
   "license": "ISC",
@@ -19,6 +18,7 @@
     "cors": "^2.8.5",
     "dotenv": "^16.4.7",
     "express": "^5.1.0",
+    "joi": "^17.13.3",
     "nodemon": "^3.1.9"
   },
   "devDependencies": {

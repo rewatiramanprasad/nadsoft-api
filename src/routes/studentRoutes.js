@@ -1,6 +1,12 @@
 const express = require('express')
 const router = express.Router()
 const {
+  isValidStudentDetails,
+  isValidFetchDetails,
+  isValidId,
+  isValidUpdateDetails,
+} = require('../utils/validation')
+const {
   checkHealth,
   addStudent,
   fetchStudentsRecord,
@@ -9,11 +15,19 @@ const {
   updateStudentDetails,
 } = require('../controllers/studentController')
 
-router.post('/v1/students/addStudent', addStudent)
+router.post('/v1/students/addStudent', isValidStudentDetails, addStudent)
 router.get('/v1/students/health', checkHealth)
-router.get('/v1/students/fetchStudents', fetchStudentsRecord)
-router.get('/v1/students/fetchById/:id', fetchById)
-router.put('/v1/students/updateStudent/:id', updateStudentDetails)
-router.delete('/v1/students/deleteById/:id', deleteStudent)
+router.get(
+  '/v1/students/fetchStudents',
+  isValidFetchDetails,
+  fetchStudentsRecord
+)
+router.get('/v1/students/fetchById/:id', isValidId, fetchById)
+router.put(
+  '/v1/students/updateStudent/:id',
+  isValidUpdateDetails,
+  updateStudentDetails
+)
+router.delete('/v1/students/deleteById/:id', isValidId, deleteStudent)
 
 module.exports = router

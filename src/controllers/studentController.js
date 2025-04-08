@@ -8,8 +8,8 @@ const checkHealth = (req, res) => {
 
 const addStudent = async (req, res, next) => {
   const { name, email, age, math, science, english } = req.body
-  const studentData = { name, email, age }
-  const markData = { math, science, english }
+  const studentData = { name, email, age:Number(age) }
+  const markData = { math:Number(math), science:Number(science), english:Number(english) }
 
   try {
     console.log(studentData, markData)
